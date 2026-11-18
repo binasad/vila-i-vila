@@ -1,7 +1,8 @@
 'use client'
 
 import { useLang } from '@/context/LanguageContext'
-import { MenuItem, PriceOption } from '@/data/menu'
+import { MenuItem, formatPrice } from '@/data/menu'
+import { whatsappLink } from '@/lib/contact'
 
 interface Props {
   item: MenuItem
@@ -9,31 +10,21 @@ interface Props {
 }
 
 export default function MenuCard({ item, index }: Props) {
-  const { lang, tr } = useLang()
+  const { tr } = useLang()
 
   const openWhatsApp = () => {
-    const name = item.name[lang]
-    const msg = encodeURIComponent(`${tr.whatsapp.message}Me gustaría pedir: ${name}`)
-    window.open(`https://wa.me/34621069792?text=${msg}`, '_blank')
+    const msg = `${tr.whatsapp.message}I would like to order: ${item.name} (${formatPrice(item.price)})`
+    window.open(whatsappLink(msg), '_blank', 'noopener,noreferrer')
   }
-
-  const isFallback = Array.isArray(item.price)
-    ? false
-    : false
-
-  const lowestPrice = Array.isArray(item.price)
-    ? (item.price as PriceOption[])[0].price
-    : item.price as string
 
   const badgeMap: Record<string, { label: string; color: string }> = {
     popular: { label: tr.menu.popular, color: 'bg-gold text-dark-bg' },
-    halal: { label: tr.menu.halal, color: 'bg-green-700 text-white' },
-    vegan: { label: tr.menu.vegan, color: 'bg-emerald-600 text-white' },
+    spicy: { label: `🌶 ${tr.menu.spicy}`, color: 'bg-red-700 text-white' },
   }
 
   return (
     <div
-      className="group relative bg-dark-card rounded-sm overflow-hidden border border-white/5 hover:border-gold/30 transition-all duration-400 flex flex-col"
+      className="group relative bg-dark-card rounded-sm overflow-hidden border border-white/5 hover:border-gold/30 flex flex-col h-full"
       style={{
         animationDelay: `${index * 0.07}s`,
         transition: 'border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease',
@@ -53,13 +44,12 @@ export default function MenuCard({ item, index }: Props) {
       <div className="relative overflow-hidden" style={{ aspectRatio: '4/3' }}>
         <img
           src={item.image}
-          alt={item.name[lang]}
+          alt={item.name}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-dark-card via-transparent to-transparent opacity-60" />
 
-        {/* Badge */}
         {item.badge && (
           <span className={`absolute top-3 left-3 text-[10px] font-inter font-bold tracking-wider uppercase px-2 py-1 rounded-sm ${badgeMap[item.badge].color}`}>
             {badgeMap[item.badge].label}
@@ -70,22 +60,27 @@ export default function MenuCard({ item, index }: Props) {
       {/* Content */}
       <div className="flex flex-col flex-1 p-4 gap-3">
         <div className="flex-1">
-          <h3 className="text-cream font-playfair text-lg leading-snug mb-1">{item.name[lang]}</h3>
-          <p className="text-muted font-inter text-sm leading-relaxed line-clamp-2">{item.description[lang]}</p>
+          <h3 className="text-cream font-playfair text-lg leading-snug mb-1">{item.name}</h3>
+          <p className="text-muted font-inter text-sm leading-relaxed">{item.description}</p>
+
+          {item.includes && (
+            <div className="mt-3">
+              <p className="text-gold font-inter text-[10px] uppercase tracking-widest mb-1.5">{tr.menu.includes}</p>
+              <ul className="flex flex-col gap-1">
+                {item.includes.map(line => (
+                  <li key={line} className="text-cream/80 font-inter text-xs flex gap-2">
+                    <span className="text-gold">•</span>
+                    <span>{line}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
 
         {/* Price + Button */}
         <div className="flex items-end justify-between gap-2 mt-auto pt-3 border-t border-white/5">
-          <div>
-            {Array.isArray(item.price) ? (
-              <div className="flex flex-col gap-0.5">
-                <span className="text-muted font-inter text-[10px] uppercase tracking-wider">{tr.menu.from}</span>
-                <span className="text-gold font-playfair text-xl font-bold">{lowestPrice}</span>
-              </div>
-            ) : (
-              <span className="text-gold font-playfair text-xl font-bold">{item.price as string}</span>
-            )}
-          </div>
+          <span className="text-gold font-playfair text-xl font-bold">{formatPrice(item.price)}</span>
           <button
             onClick={openWhatsApp}
             className="flex items-center gap-1.5 bg-transparent border border-gold/50 hover:bg-gold hover:border-gold text-gold hover:text-dark-bg font-inter text-xs tracking-widest uppercase px-3 py-2 transition-all duration-200 rounded-sm whitespace-nowrap"
@@ -96,17 +91,6 @@ export default function MenuCard({ item, index }: Props) {
             {tr.menu.order}
           </button>
         </div>
-
-        {/* Price breakdown for multi-price items */}
-        {Array.isArray(item.price) && (item.price as PriceOption[]).length > 1 && (
-          <div className="flex flex-wrap gap-2 -mt-1">
-            {(item.price as PriceOption[]).map(p => (
-              <span key={p.price} className="text-muted font-inter text-[10px]">
-                {p.label[lang]}: <span className="text-cream/70">{p.price}</span>
-              </span>
-            ))}
-          </div>
-        )}
       </div>
     </div>
   )

@@ -21,15 +21,15 @@ export default function LoadingScreen() {
     >
       <div className="flex flex-col items-center gap-6">
         <div className="text-center">
-          <p className="text-gold text-sm tracking-[0.4em] uppercase mb-2 font-inter">Doner Kebab &amp; Pizzeria</p>
-          <h1 className="text-cream text-5xl md:text-6xl font-playfair font-bold tracking-tight">
-            Vila i Vila
+          <p className="text-gold text-sm tracking-[0.4em] uppercase mb-2 font-inter">Signature Shawarma</p>
+          <h1 className="text-cream text-4xl md:text-6xl font-playfair font-bold tracking-tight">
+            One Way Shawarma
           </h1>
         </div>
         <div className="w-48 h-[1px] bg-dark-card2 relative overflow-hidden">
           <div className="absolute inset-y-0 left-0 bg-gold animate-[goldLine_1.2s_ease_forwards]" />
         </div>
-        <p className="text-muted text-xs tracking-[0.3em] uppercase font-inter">Barcelona</p>
+        <p className="text-muted text-xs tracking-[0.3em] uppercase font-inter">Fresh · Hot · Halal</p>
       </div>
     </div>
   )

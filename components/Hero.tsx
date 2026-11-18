@@ -31,7 +31,7 @@ export default function Hero() {
       <div className="absolute inset-0 animate-ken-burns">
         <img
           src="/media/hero.jpeg"
-          alt="Vila i Vila hero"
+          alt="Shawarma roasting on the grill"
           className="w-full h-full object-cover"
         />
       </div>
@@ -52,9 +52,9 @@ export default function Hero() {
         <h1
           ref={titleRef}
           className="font-playfair text-cream leading-none tracking-tight mb-6"
-          style={{ fontSize: 'clamp(3.5rem, 10vw, 8rem)' }}
+          style={{ fontSize: 'clamp(3rem, 9vw, 7rem)' }}
         >
-          Vila i Vila
+          One Way<br />Shawarma
         </h1>
 
         {/* Gold divider */}

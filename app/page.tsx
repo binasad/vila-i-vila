@@ -5,6 +5,7 @@ import Hero from '@/components/Hero'
 import InfoBar from '@/components/InfoBar'
 import Menu from '@/components/Menu'
 import WhyUs from '@/components/WhyUs'
+import Catering from '@/components/Catering'
 import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
 
@@ -18,6 +19,7 @@ export default function Home() {
         <Hero />
         <InfoBar />
         <Menu />
+        <Catering />
         <WhyUs />
         <Footer />
       </main>

@@ -4,7 +4,14 @@ import { useEffect, useState } from 'react'
 import { useLang } from '@/context/LanguageContext'
 
 export default function Navbar() {
-  const { lang, toggle, tr } = useLang()
+  const { tr } = useLang()
+
+  const links = [
+    { label: tr.nav.menu, id: 'menu' },
+    { label: tr.nav.catering, id: 'catering' },
+    { label: tr.nav.about, id: 'whyus' },
+    { label: tr.nav.contact, id: 'footer' },
+  ]
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -32,17 +39,13 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
         <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex flex-col items-start">
-          <span className="text-gold text-[10px] tracking-[0.35em] uppercase font-inter">Doner Kebab &amp; Pizzeria</span>
-          <span className="text-cream font-playfair text-2xl font-bold leading-tight tracking-tight">Vila i Vila</span>
+          <span className="text-gold text-[10px] tracking-[0.35em] uppercase font-inter">Signature Shawarma</span>
+          <span className="text-cream font-playfair text-2xl font-bold leading-tight tracking-tight">One Way Shawarma</span>
         </button>
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-10">
-          {[
-            { label: tr.nav.menu, id: 'menu' },
-            { label: tr.nav.about, id: 'whyus' },
-            { label: tr.nav.contact, id: 'footer' },
-          ].map(({ label, id }) => (
+          {links.map(({ label, id }) => (
             <button
               key={id}
               onClick={() => scrollTo(id)}
@@ -51,14 +54,10 @@ export default function Navbar() {
               {label}
             </button>
           ))}
-
-          {/* Language Toggle */}
-          <LanguageToggle lang={lang} toggle={toggle} />
         </div>
 
         {/* Mobile right */}
         <div className="flex md:hidden items-center gap-4">
-          <LanguageToggle lang={lang} toggle={toggle} />
           <button
             onClick={() => setMenuOpen(o => !o)}
             className="flex flex-col gap-[5px] p-1"
@@ -74,14 +73,10 @@ export default function Navbar() {
       {/* Mobile menu */}
       <div
         className="md:hidden overflow-hidden transition-all duration-300"
-        style={{ maxHeight: menuOpen ? '200px' : '0', background: 'rgba(13,13,13,0.98)' }}
+        style={{ maxHeight: menuOpen ? '260px' : '0', background: 'rgba(13,13,13,0.98)' }}
       >
         <div className="px-6 py-4 flex flex-col gap-4">
-          {[
-            { label: tr.nav.menu, id: 'menu' },
-            { label: tr.nav.about, id: 'whyus' },
-            { label: tr.nav.contact, id: 'footer' },
-          ].map(({ label, id }) => (
+          {links.map(({ label, id }) => (
             <button
               key={id}
               onClick={() => scrollTo(id)}
@@ -93,25 +88,5 @@ export default function Navbar() {
         </div>
       </div>
     </nav>
-  )
-}
-
-function LanguageToggle({ lang, toggle }: { lang: string; toggle: () => void }) {
-  const isEN = lang === 'en'
-  return (
-    <button
-      onClick={toggle}
-      aria-label="Toggle language"
-      className="relative flex items-center rounded-full border border-gold/40 overflow-hidden font-inter text-xs font-semibold tracking-widest uppercase"
-      style={{ background: '#1A1A1A', padding: '3px' }}
-    >
-      {/* sliding pill */}
-      <span
-        className="absolute top-[3px] bottom-[3px] w-[calc(50%-3px)] rounded-full bg-gold transition-all duration-300 ease-in-out"
-        style={{ left: isEN ? 'calc(50%)' : '3px' }}
-      />
-      <span className={`relative z-10 px-3 py-1 transition-colors duration-300 ${!isEN ? 'text-dark-bg' : 'text-cream/50'}`}>ES</span>
-      <span className={`relative z-10 px-3 py-1 transition-colors duration-300 ${isEN ? 'text-dark-bg' : 'text-cream/50'}`}>EN</span>
-    </button>
   )
 }

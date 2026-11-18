@@ -2,14 +2,14 @@
 
 import { useState } from 'react'
 import { useLang } from '@/context/LanguageContext'
+import { whatsappLink } from '@/lib/contact'
 
 export default function WhatsAppButton() {
   const { tr } = useLang()
   const [hovered, setHovered] = useState(false)
 
   const open = () => {
-    const msg = encodeURIComponent(tr.whatsapp.message)
-    window.open(`https://wa.me/34621069792?text=${msg}`, '_blank')
+    window.open(whatsappLink(tr.whatsapp.message), '_blank', 'noopener,noreferrer')
   }
 
   return (

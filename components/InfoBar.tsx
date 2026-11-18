@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react'
 import { useLang } from '@/context/LanguageContext'
+import { OWNER, PHONE_DISPLAY } from '@/lib/contact'
 
 export default function InfoBar() {
   const { tr } = useLang()
@@ -25,11 +26,11 @@ export default function InfoBar() {
   }, [])
 
   const items = [
-    { icon: '🕐', label: `${tr.infoBar.open} · ${tr.infoBar.days}`, sub: tr.infoBar.hours },
-    { icon: '📍', label: 'Villa i Vila 84', sub: '08004 Barcelona' },
-    { icon: '📞', label: '621 069 792', sub: 'WhatsApp & Llamadas' },
-    { icon: '🛵', label: tr.infoBar.delivery, sub: tr.infoBar.minOrder },
-    { icon: '✅', label: '100% Halal', sub: 'Certificado' },
+    { icon: '📞', label: PHONE_DISPLAY, sub: 'WhatsApp & Calls' },
+    { icon: '👤', label: OWNER, sub: 'Owner' },
+    { icon: '💬', label: tr.infoBar.delivery, sub: tr.infoBar.deliverySub },
+    { icon: '🎉', label: 'Party Orders', sub: 'At your place' },
+    { icon: '✅', label: '100% Halal', sub: 'Always fresh' },
   ]
 
   return (

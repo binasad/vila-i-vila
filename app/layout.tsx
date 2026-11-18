@@ -16,19 +16,19 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Vila i Vila — Doner Kebab & Pizzeria Barcelona',
-  description: 'Authentic doner kebab and fresh pizza in Barcelona. 100% Halal. Delivery available. Minimum order 15€.',
-  keywords: ['doner kebab', 'pizzeria', 'barcelona', 'halal', 'delivery', 'vila i vila'],
+  title: 'One Way Shawarma — Signature Shawarma, Wraps & Platters',
+  description: 'Signature shawarma, loaded wraps and special platters. 100% Halal. Order on WhatsApp: 0300 2189122. Party orders available.',
+  keywords: ['shawarma', 'wraps', 'platters', 'halal', 'party catering', 'one way shawarma'],
   openGraph: {
-    title: 'Vila i Vila — Doner Kebab & Pizzeria',
-    description: 'Fresh. Hot. Delicious. Barcelona\'s favourite doner kebab & pizza.',
+    title: 'One Way Shawarma',
+    description: 'Fresh. Hot. Delicious. Signature shawarma, wraps & special platters.',
     type: 'website',
   },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${playfair.variable} ${inter.variable}`}>
+    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
       <body>
         <LanguageProvider>
           {children}

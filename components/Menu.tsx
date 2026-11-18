@@ -63,12 +63,9 @@ export default function Menu() {
 
   const tabs: { key: Tab; label: string }[] = [
     { key: 'all', label: tr.menu.tabs.all },
+    { key: 'shawarma', label: tr.menu.tabs.shawarma },
     { key: 'wraps', label: tr.menu.tabs.wraps },
-    { key: 'plates', label: tr.menu.tabs.plates },
-    { key: 'sides', label: tr.menu.tabs.sides },
-    { key: 'pizzas', label: tr.menu.tabs.pizzas },
-    { key: 'salads', label: tr.menu.tabs.salads },
-    { key: 'boxes', label: tr.menu.tabs.boxes },
+    { key: 'platters', label: tr.menu.tabs.platters },
   ]
 
   return (
@@ -83,7 +80,7 @@ export default function Menu() {
             transition: 'opacity 0.7s ease, transform 0.7s ease',
           }}
         >
-          <p className="text-gold text-xs tracking-[0.5em] uppercase font-inter mb-4">✦ &nbsp;Vila i Vila&nbsp; ✦</p>
+          <p className="text-gold text-xs tracking-[0.5em] uppercase font-inter mb-4">✦ &nbsp;One Way Shawarma&nbsp; ✦</p>
           <h2 className="text-cream font-playfair text-5xl md:text-6xl mb-4">{tr.menu.title}</h2>
           <p className="text-muted font-inter text-base">{tr.menu.subtitle}</p>
           <div className="flex items-center justify-center gap-4 mt-6">
